@@ -75,7 +75,7 @@ python evaluate_result.py -m [mode]
 ```
 Here, `mode` is the same as above.<br>
 
-Then you'll get `median rank, accuracy@1/10/100, rank variance` results on 3 testsets include **seen**，**unseen**，**description**. <br>
+Then you'll get `median rank, accuracy@1/10/100, rank variance` results on 3 testsets include **seen**, **unseen**, **description**. <br>
 
 Model|**Seen** Definition|**Unseen** Definition|**Description**
 ---|:---:|:---:|:---:
@@ -106,11 +106,15 @@ Word Length |1 .40/.71/.90 269 |6 .25/.56/.84 346 |0 .55/.85/.95 163
 
 <br>
 <br>
+
 ### Training Chinese model
+
 ```bash
 python main.py -e [epoch] -g [gpu_num] -u/s -m [CPsc, C, P, s, c, b] -v
 ```
+
 #### Evaluation and results
+
 ```bash
 python evaluate_result.py -m [mode]
 ```
