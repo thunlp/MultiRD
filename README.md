@@ -10,7 +10,7 @@ A reverse dictionary takes the description of a target word as input and outputs
 
 ## Quick Start
 Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as those here.
-Unzip the data.zip (in English and Chinese paths respectively), and all files should be prepared as follows:
+Unzip the data.zip (in English and Chinese paths respectively), and all files in EnglishReverseDictionary and ChineseReverseDictionary paths should be prepared as follows:
 ```
 ReverseDictionary
 |- EnglishReverseDictionary
