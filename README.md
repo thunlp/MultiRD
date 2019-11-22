@@ -4,9 +4,9 @@ Code and data of the AAAI-20 paper "Multi-channel Reverse Dictionary Model"
 A reverse dictionary takes the description of a target word as input and outputs the target word together with other words that match the description. 
 
 ## Requirements
-*Python 3.x
-*Pytorch 1.x
-*Other requirements: numpy, tqdm, nltk, gensim, thulac
+* Python 3.x
+* Pytorch 1.x
+* Other requirements: numpy, tqdm, nltk, gensim, thulac
 
 ## Quick Start
 Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as those here.
@@ -144,9 +144,15 @@ Initial Char| 0 .74/.89/.92 220| 0 .55/.82/.86 304| 0 .61/.88/.93 239| 0 .84/.95
 Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.94 212
 
 ## Prepare your own data
+...
 ### Data formats
+...
 ### Data process
+...
 
 ## Cite
 ```
+@inproceedings{
+   waiting...
+}
 ```
