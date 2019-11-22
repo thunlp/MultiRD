@@ -66,7 +66,7 @@ Execute this command under code path：<br>
 ```bash
 python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -f [freq_mor] -m [rsl, r, s, l, b] -v
 ```
-In `-m [rsl, r, s, l, b]`, `-m r` indicates the use of Morpheme information include roots and affixes. You can filter morphemes by `-f`, usually 15~35. `-m s` means to use Sememe information. `-m l` means to use lexnames, that is Word Category information (include Category and POS information). `-m b` means not using any other information, just the basic BiLSTM model. `-m rsl` means to use all information which is our Multi-channel model. <br>
+In `-m [rsl, r, s, l, b]`, `-m r` indicates the use of Morpheme information include roots and affixes. You can filter morphemes by `-f`, usually 15~35. `-m s` means to use Sememe information. `-m l` means to use lexnames, that is Word Category information (include Lexical name and POS information). `-m b` means not using any other information, just the basic BiLSTM model. `-m rsl` means to use all information which is our Multi-channel model. <br>
 
 After training, you can get two new files, `xxx_label_list.json` and `xxx_pred_list.json`. xxx means the mode you set in `-m`, e.g. the `-m rsl` setting indicates that the file will be `rsl_label_list.json`. <br>
 
