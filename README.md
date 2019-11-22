@@ -52,11 +52,13 @@ ReverseDictionary
 |     |- evaluate.py
 |     |- evaluate_result.py
 |- PrepareYourOwnDataset
-   |- 
-   |- 
-   |- 
-   |- 
-   |- 
+   |- proc_allFeatures.py
+   |- get_wordnet_lexname.py
+   |- get_wordnet_500sample.py
+   |- process_googleVec_checkAllData.py
+   |- readHowNet_to_word_sememe.py
+   |- wordnik_get_defi.py
+   |- check_root_affix.py
 ```
 
 ### Training English model
