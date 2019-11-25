@@ -10,7 +10,7 @@ A reverse dictionary takes the description of a target word as input and outputs
 
 ## Quick Start
 Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as those here.
-Unzip the data.zip (in English and Chinese paths respectively), and all files in EnglishReverseDictionary and ChineseReverseDictionary paths should be prepared as follows:
+Unzip the data.zip (under English and Chinese paths respectively), and all files under EnglishReverseDictionary and ChineseReverseDictionary paths should be prepared as follows:
 ```
 ReverseDictionary
 |- EnglishReverseDictionary
@@ -66,7 +66,12 @@ Execute this command under code path：<br>
 ```bash
 python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -f [freq_mor] -m [rsl, r, s, l, b] -v
 ```
-In `-m [rsl, r, s, l, b]`, `-m r` indicates the use of Morpheme information include roots and affixes. You can filter morphemes by `-f`, usually 15~35. `-m s` means to use Sememe information. `-m l` means to use lexnames, that is Word Category information (include Lexical name and POS information). `-m b` means not using any other information, just the basic BiLSTM model. `-m rsl` means to use all information which is our Multi-channel model. <br>
+In `-m [rsl, r, s, l, b]`, `-m r` indicates the use of Morpheme information include roots and affixes. You can filter morphemes by `-f`, usually 15~35. `-m s` means to use Sememe predictor. `-m l` means to use lexnames, which is Word Category information (include Lexical name and POS information). `-m b` means not using any other information, just the basic BiLSTM model. `-m rsl` means to use all information which is our Multi-channel model. <br>
+It is about 2.5G RAM when you set `-b 256` in Multi-channel model (rsl mode). <br>
+`-e` usually 10 to 20. <br>
+`-g` means which GPU card to use. <br>
+`-v` means showing progess bar. <br>
+
 
 After training, you can get two new files, `xxx_label_list.json` and `xxx_pred_list.json`. xxx means the mode you set in `-m`, e.g. the `-m rsl` setting indicates that the file will be `rsl_label_list.json`. <br>
 
@@ -110,16 +115,24 @@ Word Length |1 .40/.71/.90 269 |6 .25/.56/.84 346 |0 .55/.85/.95 163
 <br>
 
 ### Training Chinese model
-
+Execute this command under code path：<br>
 ```bash
-python main.py -e [epoch] -g [gpu_num] -u/s -m [CPsc, C, P, s, c, b] -v
+python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -u/s -m [CPsc, C, P, s, c, b] -v
 ```
+Different from EnglishRD training command, we use `-u` or `-s` to represent **Unseen** or **Seen** test mode. In fact, there is no need to use the test mode of Seen Definition. <br>
+In `-m [CPsc, C, P, s, c, b]`, `-m C` means to use Cilin information. We use 4 Word-Classes in Cilin. `-m P` means to use POS predictor. `-m s` means to use Sememe predictor. `-m c` indicates the use of Morpheme predictor. Morphemes are characters in Chinese. `-m b` means not using any other information, just the basic BiLSTM model. `-m CPsc` means to use all information which is our Multi-channel model. <br>
+It is about 7.6G RAM when you set `-b 128` in `CPsc` mode. <br>
+`-e` usually 10 to 20. <br>
+`-g` means which GPU card to use. <br>
+`-v` means showing progess bar. <br>
 
 #### Evaluation and results
 
 ```bash
 python evaluate_result.py -m [mode]
 ```
+Here, the `mode` is the prefix of `xxx_label_list.json`. <br>
+Then you'll get `median rank, accuracy@1/10/100, rank variance` results on 4 testsets include **seen**, **unseen**, **description** and **Question**. <br>
 
 Model |**Seen** Definition |**Useen** Definition| **Description**| **Question**
 ---|:---:|:---:|:---:|:---:
@@ -146,11 +159,11 @@ Initial Char| 0 .74/.89/.92 220| 0 .55/.82/.86 304| 0 .61/.88/.93 239| 0 .84/.95
 Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.94 212
 
 ## Prepare your own data
-...
+Todo...
 ### Data formats
-...
+Todo...
 ### Data process
-...
+Todo...
 
 ## Cite
 ```
