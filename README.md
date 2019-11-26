@@ -52,13 +52,7 @@ ReverseDictionary
 |     |- evaluate.py
 |     |- evaluate_result.py
 |- PrepareYourOwnDataset
-   |- proc_allFeatures.py
-   |- get_wordnet_lexname.py
-   |- get_wordnet_500sample.py
-   |- process_googleVec_checkAllData.py
-   |- readHowNet_to_word_sememe.py
-   |- wordnik_get_defi.py
-   |- check_root_affix.py
+   |- ...
 ```
 
 ### Training English model
@@ -160,6 +154,19 @@ Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.
 
 ## Prepare your own data
 Todo...
+```
+ReverseDictionary
+|- EnglishReverseDictionary
+|- ChineseReverseDictionary
+|- PrepareYourOwnDataset
+   |- proc_allFeatures.py
+   |- get_wordnet_lexname.py
+   |- get_wordnet_500sample.py
+   |- process_googleVec_checkAllData.py
+   |- readHowNet_to_word_sememe.py
+   |- wordnik_get_defi.py
+   |- check_root_affix.py
+```
 ### Data formats
 Todo...
 ### Data process
