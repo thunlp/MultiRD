@@ -1,7 +1,8 @@
 # MultiRD
 Code and data of the AAAI-20 paper "Multi-channel Reverse Dictionary Model"
 
-A reverse dictionary takes the description of a target word as input and outputs the target word together with other words that match the description. 
+A reverse dictionary takes the description of a target word as input and outputs the target word together with other words that match the description. In this paper, we propose a multi-channel reverse dictionary model, which incorporates multiple predictors to predict characteristics of target words from given input queries. 
+Experimental results and analyses show that our model achieves the state-of-the-art performance and also possesses outstanding robustness.
 
 ## Requirements
 * Python 3.x
@@ -152,6 +153,9 @@ POS Tag| 1 .50/.79/.90 222 |9 .18/.51/.77 307 |4 .24/.61/.85 252 |0 .50/.74/.90 
 Initial Char| 0 .74/.89/.92 220| 0 .55/.82/.86 304| 0 .61/.88/.93 239| 0 .84/.95/.95 213
 Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.94 212
 
+<br>
+<br>
+
 ## Prepare your own data
 Here are some codes for reference. The data format is shown below. You can build your own data set.
 ```
@@ -202,6 +206,8 @@ morfessor-train --encoding=ISO_8859-15 --traindata-list --logfile=log.log -s mod
 morfessor-segment -l ../morfessor_data/model.bin target_words.txt -o word_root_affix.txt
 ```
 Unfortunately, the morphemes obtained by this method are not accurate. It is recommended that you use the standard root affix dictionary.<br>
+
+<br>
 
 ## Cite
 ```
