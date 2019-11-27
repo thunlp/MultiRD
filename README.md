@@ -52,7 +52,7 @@ ReverseDictionary
 |     |- evaluate.py
 |     |- evaluate_result.py
 |- PrepareYourOwnDataset
-   |- ...
+   |- <See below.>
 ```
 
 ### Training English model
@@ -153,7 +153,7 @@ Initial Char| 0 .74/.89/.92 220| 0 .55/.82/.86 304| 0 .61/.88/.93 239| 0 .84/.95
 Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.94 212
 
 ## Prepare your own data
-Todo...
+Here are some codes for reference. The data format is shown below. You can build your own data set.
 ```
 ReverseDictionary
 |- EnglishReverseDictionary
@@ -168,9 +168,40 @@ ReverseDictionary
    |- check_root_affix.py
 ```
 ### Data formats
-Todo...
-### Data process
-Todo...
+It is json format in data_xxx.json files.
+```
+{
+     "word": "fatalism",
+     "lexnames": [
+         "noun.cognition"
+     ],
+     "root_affix": [
+         "fatal",
+         "ism"
+     ],
+     "sememes": [
+         "knowledge",
+         "believe",
+         "experience",
+         "Fate"
+     ],
+     "definitions": "the doctrine that all events are predetermined by fate and are therefore unalterable"
+}
+```
+Word embeddings are in `vec_inuse.json` which contains all target words and words in definitions. Only those in use are included. The format is `{word: [vector]}, ...`.<br>
+`lexname_all.txt` contains all 45 lexnames from wordnet.<br>
+`sememes_all.txt` contains 1400 sememes from hownet.<br>
+Morphemes (root and affix) are in `root_affix_freq.txt`, which contains morphemes and their numbers, separated by spaces.
+
+### Data downloading and processing
+In EnglishRD, We're using [Felix Hill's dataset](https://fh295.github.io/teaching.html) from [(Hill et al. 2016)](https://arxiv.org/pdf/1504.00548.pdf). Word embeddings are [GoogleNews-vectors-negative300](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing). Sememes can be get from [Hownet](https://openhownet.thunlp.org/download). Lexnames are in wordnet which you can get it easily from NLTK by python.<br>
+We get morphemes by [Morfessor tool](https://morfessor.readthedocs.io/en/latest/). The dataset used is from [morpho.aalto.fi](http://morpho.aalto.fi/events/morphochallenge2010/datasets.shtml).<br>
+You should train mofessor model first, and then use it to process the target words to get the corresponding roots and affixes.<br>
+```bash
+morfessor-train --encoding=ISO_8859-15 --traindata-list --logfile=log.log -s model.bin -d ones wordlist-2010.eng
+morfessor-segment -l ../morfessor_data/model.bin target_words.txt -o word_root_affix.txt
+```
+Unfortunately, the morphemes obtained by this method are not accurate. It is recommended that you use the standard root affix dictionary.<br>
 
 ## Cite
 ```
@@ -178,3 +209,7 @@ Todo...
    waiting...
 }
 ```
+
+## Contact
+You can visit our [reverse dictionary website](https://wantwords.thunlp.org/), where we have optimized our methods and datasets, but we haven't updated them here. You can contact us if you have any questions. 
+- zhanglei9003@gmail.com
