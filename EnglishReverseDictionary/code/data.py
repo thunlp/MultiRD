@@ -74,7 +74,13 @@ def load_data(frequency):
     index2word.extend(['<PAD>', '<OOV>'])
     index2word.extend(vocab)
     word2vec = np.zeros((vocab_size, len(list(vec_inuse.values())[0])), dtype=np.float32)
+    for wd in target_words: 
+        index = len(word2index)
+        word2index[wd] = index
+        word2vec[index, :] = vec_inuse[wd]
     for wd in vocab:
+        if wd in target_words:
+            continue
         index = len(word2index)
         word2index[wd] = index
         word2vec[index, :] = vec_inuse[wd]
