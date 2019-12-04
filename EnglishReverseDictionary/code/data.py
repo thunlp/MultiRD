@@ -57,8 +57,6 @@ def load_data(frequency):
         rootaffix_freq[line.strip().split()[0]] = int(line.strip().split()[1])
     lines = open(os.path.join(data_path, 'rootaffix_all.txt')).readlines()
     rootaffix_all = [line.strip() for line in lines]
-    label_rootaffix_size = len(rootaffix_all)
-    print('label_rootaffix_size: ', label_rootaffix_size)
     lines = open(os.path.join(data_path, 'sememes_all.txt')).readlines()
     sememes_all = [line.strip() for line in lines]
     label_sememe_size = len(sememes_all)+1
@@ -100,6 +98,8 @@ def load_data(frequency):
         if rootaffix_freq[ra] >= frequency:
             rootaffix2index[ra] = len(rootaffix2index)
             index2rootaffix.append(ra)
+    label_rootaffix_size = len(index2rootaffix)
+    print('label_rootaffix_size: ', label_rootaffix_size)
     data_train_idx = data2index(data_train, word2index, sememe2index, lexname2index, rootaffix2index, rootaffix_freq, frequency)
     print('data_train size: %d'%len(data_train_idx))
     data_dev_idx = data2index(data_dev, word2index, sememe2index, lexname2index, rootaffix2index, rootaffix_freq, frequency)
