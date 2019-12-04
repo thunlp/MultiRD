@@ -210,9 +210,14 @@ Unfortunately, the morphemes obtained by this method are not accurate. It is rec
 <br>
 
 ## Cite
+If you use any code or data, please cite this paper
+
 ```
-@inproceedings{
-   waiting...
+@inproceedings{zhang2020multi
+title={Multi-channel Reverse Dictionary Model},
+author={Lei Zhang, Fanchao Qi, Zhiyuan Liu, Yasheng Wang, Qun Liu, Maosong Sun},
+booktitle={Proceedings of AAAI},
+year={2020},
 }
 ```
 
