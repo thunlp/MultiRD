@@ -215,7 +215,7 @@ If you use any code or data, please cite this paper
 ```
 @inproceedings{zhang2020multi
 title={Multi-channel Reverse Dictionary Model},
-author={Lei Zhang, Fanchao Qi, Zhiyuan Liu, Yasheng Wang, Qun Liu, Maosong Sun},
+author={Zhang, Lei and Qi, Fanchao and Liu, Zhiyuan and Wang, Yasheng and Liu, Qun and Sun, Maosong},
 booktitle={Proceedings of AAAI},
 year={2020},
 }
