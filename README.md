@@ -118,7 +118,7 @@ In `-m [CPsc, C, P, s, c, b]`
 python evaluate_result.py -m [mode]
 ```
 Here, the `mode` is the prefix of `xxx_label_list.json`. 
-Then you'll get `median rank`,  ` accuracy@1/10/100` and  `rank variance` results on 3 test sets including **seen**, **unseen**, **Description** and **Question**. 
+Then you'll get `median rank`,  ` accuracy@1/10/100` and  `rank variance` results on 4 test sets including **seen**, **unseen**, **Description** and **Question**. 
 
 
 
