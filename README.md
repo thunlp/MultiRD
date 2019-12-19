@@ -77,7 +77,7 @@ In `-m [rsl, r, s, l, b]`,
 
 After training, you will get two new files, `xxx_label_list.json` and `xxx_pred_list.json`. "xxx" indicates the mode you set in `-m`, e.g., the `-m rsl` setting indicates that the file will be `rsl_label_list.json`. 
 
-#### Evaluation and results
+#### Evaluation
 Execute this command under code path:
 ```bash
 python evaluate_result.py -m [mode]
@@ -112,7 +112,7 @@ In `-m [CPsc, C, P, s, c, b]`
 
 `-e` , `-g` and `-v` are the same as those in English model training. 
 
-#### Evaluation and results
+#### Evaluation
 
 ```bash
 python evaluate_result.py -m [mode]
@@ -127,7 +127,7 @@ You can evaluate model performance with prior knowledge:
 python result_analysis_Ch.py -m [mode]
 ```
 
-## Prepare your own data
+## Prepare Your Own Data
 
 Here is some code for reference. The data format is shown below, and you can build your own data set.
 ```
@@ -143,7 +143,7 @@ ReverseDictionary
    |- wordnik_get_defi.py
    |- check_root_affix.py
 ```
-### Data formats
+### Data Formats
 It is json format in data_xxx.json files.
 ```
 {
