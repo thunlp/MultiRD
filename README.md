@@ -7,7 +7,7 @@ Code and data of the AAAI-20 paper "**Multi-channel Reverse Dictionary Model**" 
 * Other requirements: numpy, tqdm, nltk, gensim, thulac
 
 ## Quick Start
-Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as that here.
+Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing) or [Tsinghua Cloud](https://cloud.tsinghua.edu.cn/d/ec29131d38fd4ca2a6ca/), where the code is the same as that here.
 
 Unzip the data.zip (under English and Chinese paths respectively), and all files under `EnglishReverseDictionary` and `ChineseReverseDictionary` should be prepared as follows:
 
@@ -192,11 +192,11 @@ Unfortunately, the morphemes obtained by this method are not accurate. It is rec
 If you use any code or data, please cite this paper
 
 ```
-@inproceedings{zhang2020multi
+@article{zhang2020multi
     title={Multi-channel Reverse Dictionary Model},
     author={Zhang, Lei and Qi, Fanchao and Liu, Zhiyuan and Wang, Yasheng and Liu, Qun and Sun, Maosong},
-    booktitle={Proceedings of AAAI},
-    year={2020},
+    journal={arXiv preprint arXiv:1912.08441},
+  	year={2019}
 }
 ```
 
