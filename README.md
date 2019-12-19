@@ -1,8 +1,5 @@
 # MultiRD
-Code and data of the AAAI-20 paper "Multi-channel Reverse Dictionary Model"
-
-A reverse dictionary takes the description of a target word as input and outputs the target word together with other words that match the description. In this paper, we propose a multi-channel reverse dictionary model, which incorporates multiple predictors to predict characteristics of target words from given input queries. 
-Experimental results and analyses show that our model achieves the state-of-the-art performance and also possesses outstanding robustness.
+Code and data of the AAAI-20 paper "**Multi-channel Reverse Dictionary Model**" [[pdf](https://arxiv.org/pdf/1912.08441.pdf)]
 
 ## Requirements
 * Python 3.x
@@ -10,8 +7,10 @@ Experimental results and analyses show that our model achieves the state-of-the-
 * Other requirements: numpy, tqdm, nltk, gensim, thulac
 
 ## Quick Start
-Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as those here.
-Unzip the data.zip (under English and Chinese paths respectively), and all files under EnglishReverseDictionary and ChineseReverseDictionary paths should be prepared as follows:
+Download the code and data from [Google Drive](https://drive.google.com/drive/folders/1jeyPE8iGdGUSVJe_6Smr_NzoWfR52f4g?usp=sharing). The code on Google drive is the same as that here.
+
+Unzip the data.zip (under English and Chinese paths respectively), and all files under `EnglishReverseDictionary` and `ChineseReverseDictionary` should be prepared as follows:
+
 ```
 ReverseDictionary
 |- EnglishReverseDictionary
@@ -56,108 +55,81 @@ ReverseDictionary
    |- <See below.>
 ```
 
-### Training English model
-Execute this command under code path：<br>
+### Train English Model
+Execute this command under code path：
 ```bash
 python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -f [freq_mor] -m [rsl, r, s, l, b] -v
 ```
-In `-m [rsl, r, s, l, b]`, `-m r` indicates the use of Morpheme information include roots and affixes. You can filter morphemes by `-f`, usually 15~35. `-m s` means to use Sememe predictor. `-m l` means to use lexnames, which is Word Category information (include Lexical name and POS information). `-m b` means not using any other information, just the basic BiLSTM model. `-m rsl` means to use all information which is our Multi-channel model. <br>
-It is about 2.5G RAM when you set `-b 256` in Multi-channel model (rsl mode). <br>
-`-e` usually 10 to 20. <br>
-`-g` means which GPU card to use. <br>
-`-v` means showing progess bar. <br>
+In `-m [rsl, r, s, l, b]`, 
+
+- `-m r` indicates the use of Morpheme information including roots and affixes. You can filter morphemes by `-f`, usually 15~35;
+-  `-m s` means using the Sememe predictor;
+-  `-m l` means using WordNet lexnames, which is word category information (include Lexical name and POS tag information);
+-  `-m b` means not using any other information, just the basic BiLSTM model;
+-  `-m rsl` means to use all information which is our Multi-channel model;
+
+`-e` is usually set to 10~20;
+
+`-g` indicates which GPU to use;
+
+`-v` means showing progess bar.
 
 
-After training, you can get two new files, `xxx_label_list.json` and `xxx_pred_list.json`. xxx means the mode you set in `-m`, e.g. the `-m rsl` setting indicates that the file will be `rsl_label_list.json`. <br>
+After training, you will get two new files, `xxx_label_list.json` and `xxx_pred_list.json`. "xxx" indicates the mode you set in `-m`, e.g., the `-m rsl` setting indicates that the file will be `rsl_label_list.json`. 
 
 #### Evaluation and results
-Execute this command under code path：<br>
+Execute this command under code path:
 ```bash
 python evaluate_result.py -m [mode]
 ```
-Here, `mode` is the same as above.<br>
+Here, `mode` is the same as above.
 
-Then you'll get `median rank, accuracy@1/10/100, rank variance` results on 3 testsets include **seen**, **unseen**, **description**. <br>
+Then you'll get `median rank`,  ` accuracy@1/10/100` and  `rank variance` results on 3 test sets including **seen**, **unseen** and **description**. 
 
-Model|**Seen** Definition|**Unseen** Definition|**Description**
----|:---:|:---:|:---:
-OneLook|0 .66/.94/.95 200| - - - |5.5 **.33**/.54/.76 332
-BOW| 172 .03/.16/.43 414 |248 .03/.13/.39 424 |22 .13/.41/.69 308
-RNN| 134 .03/.16/.44 375 |171 .03/.15/.42 404 |17 .14/.40/.73 274
-RDWECI| 121 .06/.20/.44 420 |170 .05/.19/.43 420 |16 .14/.41/.74 306
-SuperSense| 378 .03/.15/.36 462 |465 .02/.11/.31 454 |115 .03/.15/.47 396
-MS-LSTM |**0 .92/.98/.99 65**| 276 .03/.14/.37 426 |1000 .01/.04/.18 404
-BiLSTM |25 .18/.39/.63 363| 101 .07/.24/49 401| 5 .25/.60/.83 214
-BiLSTM+Mor| 24 .19/.41/.63 345 |80 .08/.26/.52 399 |4 .26/.62/.85 **198**
-BiLSTM+Cat |19 .19/.42/.68 309 |68 .08/.28/.54 362 |4 .30/.62/.85 206
-BiLSTM+Sem |19 .19/.43/.66 349| 80 .08/.26/.53 393| 4 .30/.64/.87 218
-Multi-channel| 16 .20/.44/.71 310| **54 .09/.29/.58 358** |**2** .32/**.64/.88** 203
 
-Evaluating model performance with prior knowledge. <br>
+
+You can evaluate model performance with prior knowledge:
+
 ```bash
 python analyse_result.py
 python result_analysis_En_1200.py -m [mode]
 ```
 
-Prior Knowlege|**Seen** Definition|**Unseen** Definition|**Description**
----|:---:|:---:|:---:
-None |16 .20/.44/.71 310| 54 .09/.29/.58 358 |2.5 .32/.64/.88 203
-POS Tag| 13 .21/.45/.72 290 |45 .10/.31/.60 348 |3 .35/.65/.91 174
-Initial Letter| 1 .39/.73/.90 270 |4 .26/.63/.85 348| 0 .62/.90/.97 160
-Word Length |1 .40/.71/.90 269 |6 .25/.56/.84 346 |0 .55/.85/.95 163
-
-<br>
-<br>
-
-### Training Chinese model
-Execute this command under code path：<br>
+### Train Chinese Model
+Execute this command under code path：
 ```bash
-python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -u/s -m [CPsc, C, P, s, c, b] -v
+python main.py -b [batch_size] -e [epoch_num] -g [gpu_num] -sd [random_seed] -u/-s -m [CPsc, C, P, s, c, b] -v
 ```
-Different from EnglishRD training command, we use `-u` or `-s` to represent **Unseen** or **Seen** test mode. In fact, there is no need to use the test mode of Seen Definition. <br>
-In `-m [CPsc, C, P, s, c, b]`, `-m C` means to use Cilin information. We use 4 Word-Classes in Cilin. `-m P` means to use POS predictor. `-m s` means to use Sememe predictor. `-m c` indicates the use of Morpheme predictor. Morphemes are characters in Chinese. `-m b` means not using any other information, just the basic BiLSTM model. `-m CPsc` means to use all information which is our Multi-channel model. <br>
-It is about 7.6G RAM when you set `-b 128` in `CPsc` mode. <br>
-`-e` usually 10 to 20. <br>
-`-g` means which GPU card to use. <br>
-`-v` means showing progess bar. <br>
+Different from English model training, we use `-u` or `-s` to represent **Unseen** or **Seen** test mode. In fact, there is no need to use the test mode on the Seen Definition test set. 
+In `-m [CPsc, C, P, s, c, b]`
+
+-  `-m C` means using Cilin word category information and we use 4 word classes in Cilin;
+-  `-m P` means using POS predictor;
+-  `-m s` means using Sememe predictor;
+-  `-m c` indicates the use of Morpheme predictor where morphemes are Chinese characters;
+-  `-m b` means not using any other information, just the basic BiLSTM model;
+-  `-m CPsc` means to use all information as our Multi-channel model.
+
+`-e` , `-g` and `-v` are the same as those in English model training. 
 
 #### Evaluation and results
 
 ```bash
 python evaluate_result.py -m [mode]
 ```
-Here, the `mode` is the prefix of `xxx_label_list.json`. <br>
-Then you'll get `median rank, accuracy@1/10/100, rank variance` results on 4 testsets include **seen**, **unseen**, **description** and **Question**. <br>
+Here, the `mode` is the prefix of `xxx_label_list.json`. 
+Then you'll get `median rank`,  ` accuracy@1/10/100` and  `rank variance` results on 3 test sets including **seen**, **unseen**, **Description** and **Question**. 
 
-Model |**Seen** Definition |**Useen** Definition| **Description**| **Question**
----|:---:|:---:|:---:|:---:
-BOW| 59 .08/.28/.56 403| 65 .08/.28/.53 411 |40 .07/.30/.60 357 |42 .10/.28/.63 362
-RNN |69 .05/.23/.55 379 |103 .05/.21/.49 405 |79 .04/.26/.53 361 |56 .07/.27/.60 346
-RDWECI| 56 .09/.31/.56 423| 83 .08/.28/.52 436 |32 .09/.32/.59 376| 45 .12/.32/.61 384
-BiLSTM |4 .28/.58/.78 302 |14 .15/.45/.71 343 |13 .14/.44/.78 233 |4 .30/.61/.82 243
-BiLSTM+POS |4 .28/.58/.78 309| 14 .16/.45/.71 346| 13 .14/.44/.79 255| 5 .25/.59/.79 271
-BiLSTM+Mor |1 .43/.73/.87 260 |11 .19/.47/.73 332 |8 .22/.52/.83 251 |1 .42/.73/.86 227
-BiLSTM+Cat |4 .29/.58/.78 319 |16 .14/.43/.70 356 |13 .16/.45/.77 289 |3 .33/.62/.82 246
-BiLSTM+Sem |4 .29/.60/.80 298 |14 .16/.45/.72 340 |12 .15/.45/.75 244 |4 .34/.61/.83 231
-Multi-channel| 1 .49/.78/.90 220 |10 .18/.49/.76 310| 5 .24/.56/.82 260| 0 .50/.73/.90 223
 
-Evaluating model performance with prior knowledge. <br>
+
+You can evaluate model performance with prior knowledge:
 ```bash
 python result_analysis_Ch.py -m [mode]
 ```
 
-Prior Knowledge |**Seen** Definition |**Useen** Definition| **Description**| **Question**
----|:---:|:---:|:---:|:---:
-None |1 .49/.78/.90 220 |10 .18/.49/.76 310 |5 .24/.56/.82 260 |0 .50/.73/.90 223
-POS Tag| 1 .50/.79/.90 222 |9 .18/.51/.77 307 |4 .24/.61/.85 252 |0 .50/.74/.90 223
-Initial Char| 0 .74/.89/.92 220| 0 .55/.82/.86 304| 0 .61/.88/.93 239| 0 .84/.95/.95 213
-Word Length |0 .54/.82/.91 217 |6 .23/.57/.81 297 |3 .32/.68/88 242 |0 .62/.85/.94 212
-
-<br>
-<br>
-
 ## Prepare your own data
-Here are some codes for reference. The data format is shown below. You can build your own data set.
+
+Here is some code for reference. The data format is shown below, and you can build your own data set.
 ```
 ReverseDictionary
 |- EnglishReverseDictionary
@@ -192,35 +164,41 @@ It is json format in data_xxx.json files.
      "definitions": "the doctrine that all events are predetermined by fate and are therefore unalterable"
 }
 ```
-Word embeddings are in `vec_inuse.json` which contains all target words and words in definitions. Only those in use are included. The format is `{word: [vector]}, ...`.<br>
-`lexname_all.txt` contains all 45 lexnames from wordnet.<br>
-`sememes_all.txt` contains 1400 sememes from hownet.<br>
+Word embeddings are in `vec_inuse.json` which contains all target words and words in definitions. Only used words are included. The format is `{word: [vector]}`, ....
+`lexname_all.txt` contains all 45 lexnames from WordNet.
+`sememes_all.txt` contains 1400 sememes from HowNet.
 Morphemes (root and affix) are in `root_affix_freq.txt`, which contains morphemes and their numbers, separated by spaces.
 
-### Data downloading and processing
-In EnglishRD, We're using [Felix Hill's dataset](https://fh295.github.io/teaching.html) from [(Hill et al. 2016)](https://arxiv.org/pdf/1504.00548.pdf). Word embeddings are [GoogleNews-vectors-negative300](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing). Sememes can be get from [Hownet](https://openhownet.thunlp.org/download). Lexnames are in wordnet which you can get it easily from NLTK by python.<br>
-We get morphemes by [Morfessor tool](https://morfessor.readthedocs.io/en/latest/). The dataset used is from [morpho.aalto.fi](http://morpho.aalto.fi/events/morphochallenge2010/datasets.shtml).<br>
-You should train mofessor model first, and then use it to process the target words to get the corresponding roots and affixes.<br>
+### Download and Process Data
+In English experiments, we use the Description dataset from [(Hill et al. 2016)](https://arxiv.org/pdf/1504.00548.pdf). 
+
+Word embeddings are from [GoogleNews-vectors-negative300](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing). 
+
+Sememes can be obtained using [OpenHowNet](https://github.com/thunlp/OpenHowNet). 
+
+Lexnames are from WordNet which you can get them easily by NLTK.
+
+We get morphemes by [Morfessor tool](https://morfessor.readthedocs.io/en/latest/). The used dataset is from [morpho.aalto.fi](http://morpho.aalto.fi/events/morphochallenge2010/datasets.shtml). You should train mofessor model first, and then use it to process the target words to get the corresponding roots and affixes.
+
 ```bash
 morfessor-train --encoding=ISO_8859-15 --traindata-list --logfile=log.log -s model.bin -d ones wordlist-2010.eng
 morfessor-segment -l ../morfessor_data/model.bin target_words.txt -o word_root_affix.txt
 ```
-Unfortunately, the morphemes obtained by this method are not accurate. It is recommended that you use the standard root affix dictionary.<br>
+Unfortunately, the morphemes obtained by this method are not accurate. It is recommended that you use the standard root-affix dictionary.
 
-<br>
+
 
 ## Cite
 If you use any code or data, please cite this paper
 
 ```
 @inproceedings{zhang2020multi
-title={Multi-channel Reverse Dictionary Model},
-author={Zhang, Lei and Qi, Fanchao and Liu, Zhiyuan and Wang, Yasheng and Liu, Qun and Sun, Maosong},
-booktitle={Proceedings of AAAI},
-year={2020},
+    title={Multi-channel Reverse Dictionary Model},
+    author={Zhang, Lei and Qi, Fanchao and Liu, Zhiyuan and Wang, Yasheng and Liu, Qun and Sun, Maosong},
+    booktitle={Proceedings of AAAI},
+    year={2020},
 }
 ```
 
 ## Contact
-You can visit our [reverse dictionary website](https://wantwords.thunlp.org/), where we have optimized our methods and datasets, but we haven't updated them here. You can contact us if you have any questions. 
-- zhanglei9003@gmail.com
+You can visit our [online reverse dictionary website](https://wantwords.thunlp.org/), where we have optimized our methods and datasets, but we haven't updated them here. You can post issues if you have any questions.
