@@ -192,7 +192,7 @@ Unfortunately, the morphemes obtained by this method are not accurate. It is rec
 If you use any code or data, please cite this paper
 
 ```
-@article{zhang2020multi
+@article{zhang2019multi
     title={Multi-channel Reverse Dictionary Model},
     author={Zhang, Lei and Qi, Fanchao and Liu, Zhiyuan and Wang, Yasheng and Liu, Qun and Sun, Maosong},
     journal={arXiv preprint arXiv:1912.08441},
