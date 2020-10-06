@@ -201,4 +201,4 @@ If you use any code or data, please cite this paper
 ```
 
 ## Contact
-You can visit our [online reverse dictionary website](https://wantwords.thunlp.org/), where we have optimized our methods and datasets, but we haven't updated them here. You can post issues if you have any questions.
+You can visit our [online reverse dictionary website](https://wantwords.thunlp.org/), where we have optimized our methods and datasets. Github [WantWords](https://github.com/thunlp/WantWords). You can post issues if you have any questions.
